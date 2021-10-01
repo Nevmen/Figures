@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Figures
 {
@@ -18,7 +15,7 @@ namespace Figures
         public double SideA
         {
             get { return sideA; }
-            private set { _ = sideA > 0 ? sideA = value : throw new ArgumentException("Side must be more then zero"); }
+            private set { _ = value > 0 ? sideA = value : throw new ArgumentException("Side must be more then zero"); }
         }
 
         private double sideB;
@@ -29,7 +26,7 @@ namespace Figures
         public double SideB
         {
             get { return sideB; }
-            private set { _ = sideB > 0 ? sideB = value : throw new ArgumentException("Side must be more then zero"); }
+            private set { _ = value > 0 ? sideB = value : throw new ArgumentException("Side must be more then zero"); }
         }
 
         private double sideC;
@@ -40,7 +37,7 @@ namespace Figures
         public double SideC
         {
             get { return sideC; }
-            private set { _ = sideC > 0 ? sideC = value : throw new ArgumentException("Side must be more then zero"); }
+            private set { _ = value > 0 ? sideC = value : throw new ArgumentException("Side must be more then zero"); }
         }
 
         #endregion
@@ -58,7 +55,7 @@ namespace Figures
             SideA = sideA;
             SideB = sideB;
             SideC = sideC;
-            if (!IsRightTriangle()) throw new Exception("Sum of two triangle sides must be more then third");
+            if (!IsRightTriangle()) throw new ArgumentException("Sum of two triangle sides must be more then third");
         }
 
         #endregion
@@ -84,19 +81,26 @@ namespace Figures
         }
 
         /// <summary>
-        /// Sum of two triangle sides must be more then third
+        /// Cheks if sum of two triangle sides must be more then third
         /// </summary>
         /// <returns>Return true if triangle is right</returns>
         private bool IsRightTriangle()
         {
-            if (sideA + sideB > sideC || sideA + sideC > sideB || sideB + sideC > sideA)
+            if (sideA + sideB > sideC && sideA + sideC > sideB && sideB + sideC > sideA)
                 return true;
             return false;
         }
 
+        /// <summary>
+        /// Cheks if triangle is rectangular
+        /// </summary>
+        /// <returns>Return true if triangle is rectangular</returns>
         public bool IsRectangularTriangle()
         {
-            
+            List<double> sides = new List<double> { sideA, sideB, sideC };
+            sides.Sort();
+            if (Math.Pow(sides[2], 2) == Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2))
+                return true;
             return false;
         }
 

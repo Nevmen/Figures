@@ -7,13 +7,13 @@ namespace FiguresTests
     public class CircleTests
     {
         [Fact]
-        public void CircleZeroConstructorTest()
+        public void CircleZeroRadiusConstructorTest()
         {
             Assert.Throws<ArgumentException>(() => new Circle(0));
         }
 
         [Fact]
-        public void CircleBelowZeroConstructorTest()
+        public void CircleBelowZeroRadiusConstructorTest()
         {
             Assert.Throws<ArgumentException>(() => new Circle(-5.5));
         }
